@@ -1,39 +1,190 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Deadlock Detection Simulator</title>
+  <title>Deadlock Detection Simulator | OS Project</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Deadlock Detection Simulator</h1>
-
-    <div class="controls">
-      <div class="field">
-        <label for="numProc">Number of Processes</label>
-        <input id="numProc" type="number" min="1" value="3" />
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon">🔒</span>
+        <span class="logo-text">DeadlockOS</span>
       </div>
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#simulator" class="nav-link">Simulator</a></li>
+        <li><a href="#developers" class="nav-link">Developers</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-      <div class="field">
-        <label for="numRes">Number of Resources</label>
-        <input id="numRes" type="number" min="1" value="3" />
-      </div>
-
-      <div class="buttons">
-        <button id="setupBtn">Setup Matrices</button>
-        <button id="detectBtn" style="display:none;">Detect Deadlock</button>
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-background">
+      <div class="glow-orb orb-1"></div>
+      <div class="glow-orb orb-2"></div>
+      <div class="glow-orb orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="gradient-text">Deadlock Detection</span>
+        <br />
+        Simulator
+      </h1>
+      <p class="hero-subtitle">
+        Visualize and analyze process-resource deadlocks using advanced graph algorithms
+      </p>
+      <div class="hero-buttons">
+        <a href="#simulator" class="btn btn-primary glow-btn">Try Simulator</a>
+        <a href="#about" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
-
-    <div id="matrices" class="matrices" aria-live="polite" style="margin-top:18px;">
-      <!-- Allocation and Request tables will be appended here via DOM -->
+    <div class="scroll-indicator">
+      <span>Scroll Down</span>
+      <div class="scroll-arrow"></div>
     </div>
+  </section>
 
-    <div id="output"></div>
-    <div id="mediaOutput"></div>
-  </div>
+  <!-- About Section -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <h2 class="section-title">About the Project</h2>
+      <div class="about-content">
+        <div class="about-card">
+          <div class="card-icon">🎯</div>
+          <h3>Purpose</h3>
+          <p>This simulator helps visualize deadlock detection in operating systems using the wait-for graph algorithm. It's designed for educational purposes to understand resource allocation and deadlock scenarios.</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">⚙️</div>
+          <h3>Algorithm</h3>
+          <p>Uses cycle detection in wait-for graphs to identify deadlocked processes. When a process P<sub>i</sub> waits for resources held by P<sub>j</sub>, an edge is created, and cycles indicate deadlocks.</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">💡</div>
+          <h3>Features</h3>
+          <p>Interactive matrix inputs for allocation and request tables, real-time deadlock detection, visual feedback with cycle identification, and comprehensive process analysis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulator Section -->
+  <section id="simulator" class="simulator-section">
+    <div class="container">
+      <h2 class="section-title">Deadlock Detection Simulator</h2>
+      
+      <div class="simulator-card">
+        <div class="controls">
+          <div class="field">
+            <label for="numProc">Number of Processes</label>
+            <input id="numProc" type="number" min="1" max="10" value="3" />
+          </div>
+
+          <div class="field">
+            <label for="numRes">Number of Resources</label>
+            <input id="numRes" type="number" min="1" max="10" value="3" />
+          </div>
+
+          <div class="buttons">
+            <button id="setupBtn" class="btn btn-primary">Setup Matrices</button>
+            <button id="detectBtn" class="btn btn-detect" style="display:none;">Detect Deadlock</button>
+          </div>
+        </div>
+
+        <div id="matrices" class="matrices" aria-live="polite">
+          <!-- Allocation and Request tables will be appended here via DOM -->
+        </div>
+
+        <div id="output" class="output-message"></div>
+        <div id="mediaOutput" class="media-output"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developers Section -->
+  <section id="developers" class="developers-section">
+    <div class="container">
+      <h2 class="section-title">Our Team</h2>
+      <div class="developers-grid">
+        <div class="developer-card">
+          <div class="dev-avatar">
+            <img src="https://scontent.fcgp7-1.fna.fbcdn.net/v/t39.30808-6/585556145_2015052689086398_4631419653044346525_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=IovnDTuidJkQ7kNvwGuQmS_&_nc_oc=Adkqf6WwDAMOOrIuPdjenTWXpf7MBXEeSD_u5e-JeryWHia6xxSbKX3QvahUOiG5dfw&_nc_zt=23&_nc_ht=scontent.fcgp7-1.fna&_nc_gid=F3mvvs5KvWe0EePGU77iiQ&oh=00_AfrDclWnR3TtBPZmm4rD3gl-CLneBSS9hYtAcJ6yjuF-5g&oe=6971CB2B" alt="Gazi Shaharabi Anwar Tuhin">
+          </div>
+          <h3>Gazi Shaharabi Anwar Tuhin</h3>
+          <p class="dev-id">C231035</p>
+          <div class="dev-role">Lead Developer</div>
+        </div>
+        
+        <div class="developer-card">
+          <div class="dev-avatar">
+            <img src="https://scontent.fcgp7-2.fna.fbcdn.net/v/t39.30808-6/505926074_4093911434258234_2301911976361753993_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=102&ccb=1-7&_nc_sid=a5f93a&_nc_ohc=GSt4Jr8Uv7sQ7kNvwEnz4Oa&_nc_oc=AdkwJEqK7RYps5MPSdovUr0aeEHjBvrzjDcvEC1VvMddpKLtFoWii7qFkTpCRHhzIbc&_nc_zt=23&_nc_ht=scontent.fcgp7-2.fna&_nc_gid=RfBgwu_lCbVW2vtqszDTNA&oh=00_AfoEVgg8loWeULM2dwd3W-ixUB9YsVI53-U3mL0r6B9HhQ&oe=6971B25A" alt="Shuvo Nath">
+          </div>
+          <h3>Shuvo<br>Nath</h3>
+          <p class="dev-id">C231021</p>
+          <div class="dev-role">Frontend Developer</div>
+        </div>
+        
+        <div class="developer-card">
+          <div class="dev-avatar">
+            <img src="https://scontent.fcgp7-1.fna.fbcdn.net/v/t39.30808-6/549455370_773294512074254_373557373420860444_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=elkn9Y6U6FoQ7kNvwEV34tG&_nc_oc=AdmUSB6iXx1S0CAayD1Pcrr0klPMqyzfPL3hPpKtnZherusV7LxDhAQJhc6mxNIy09g&_nc_zt=23&_nc_ht=scontent.fcgp7-1.fna&_nc_gid=_jPK9oS6TWMQlcXGf41Hgg&oh=00_AfryOSr7STLsiXSTIzLLd2IgIv3pVs5kQl-IWbuMe-MbSw&oe=6971B8AA" alt="Sajedul Alam Fahim">
+          </div>
+          <h3>Sajedul Alam<br>Fahim</h3>
+          <p class="dev-id">C231031</p>
+          <div class="dev-role">Project Designer</div>
+        </div>
+        
+        <div class="developer-card">
+          <div class="dev-avatar">
+            <img src="https://scontent.fcgp7-1.fna.fbcdn.net/v/t39.30808-6/435453283_991789995800631_8658571962575383702_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=8TL2hYV9JBYQ7kNvwFYomAx&_nc_oc=Adm6l-2aQSb60SYceYZg_rrVCLv8s6gfbpxGXmD_0KjBQYY0pT45Ge8ueGMYN8kjhi4&_nc_zt=23&_nc_ht=scontent.fcgp7-1.fna&_nc_gid=9z-Gb_ievoI38CPPsFDBqg&oh=00_AfpL0MgaoeIhcav22tnIjc0ML5Pa-8qWSHiB11SbQF_SsQ&oe=6971C5F6" alt="S. M. Muntasir Sarwar">
+          </div>
+          <h3>S. M. Muntasir Sarwar</h3>
+          <p class="dev-id">C231037</p>
+          <div class="dev-role">Backend Developer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>DeadlockOS Simulator</h4>
+          <p>An operating system deadlock detection project built for educational purposes.</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#simulator">Simulator</a></li>
+            <li><a href="#developers">Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Project Info</h4>
+          <p>Operating Systems Lab Course</p>
+          <p>Academic Semester Autumn 2025</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 DeadlockOS Simulator. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

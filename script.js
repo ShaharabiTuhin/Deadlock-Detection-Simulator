@@ -1,4 +1,47 @@
-// event wiring
+// ============================================
+// SMOOTH SCROLLING & NAVIGATION
+// ============================================
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Mobile menu toggle
+const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+const navMenu = document.querySelector('.nav-menu');
+
+if (mobileMenuToggle) {
+  mobileMenuToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    mobileMenuToggle.classList.toggle('active');
+  });
+}
+
+// Navbar background on scroll
+window.addEventListener('scroll', () => {
+  const navbar = document.querySelector('.navbar');
+  if (window.scrollY > 50) {
+    navbar.style.background = 'rgba(10, 14, 39, 0.98)';
+    navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.3)';
+  } else {
+    navbar.style.background = 'rgba(10, 14, 39, 0.95)';
+    navbar.style.boxShadow = 'none';
+  }
+});
+
+// ============================================
+// DEADLOCK DETECTION LOGIC
+// ============================================
+
+// Event wiring
 document
   .getElementById("setupBtn")
   .addEventListener("click", setupMatrixInputs);
@@ -12,6 +55,7 @@ function createMatrixTable(n, m, idPrefix) {
   // returns <div class="matrix-card"> which contains title + table
   const card = document.createElement("div");
   card.className = "matrix-card";
+  card.style.animation = "fadeInUp 0.5s ease-out";
 
   const title = document.createElement("div");
   title.className = "matrix-title";
@@ -68,7 +112,10 @@ function createMatrixTable(n, m, idPrefix) {
 function setupMatrixInputs() {
   const n = +document.getElementById("numProc").value;
   const m = +document.getElementById("numRes").value;
-  if (!n || !m || n < 1 || m < 1) return;
+  if (!n || !m || n < 1 || m < 1) {
+    alert("Please enter valid positive numbers for processes and resources.");
+    return;
+  }
 
   const container = document.getElementById("matrices");
   clearChildren(container);
@@ -81,8 +128,10 @@ function setupMatrixInputs() {
   container.appendChild(allocCard);
   container.appendChild(reqCard);
 
-  // show detect button
-  document.getElementById("detectBtn").style.display = "inline-block";
+  // show detect button with animation
+  const detectBtn = document.getElementById("detectBtn");
+  detectBtn.style.display = "inline-block";
+  detectBtn.style.animation = "fadeIn 0.5s ease-out";
 
   // clear outputs
   document.getElementById("output").textContent = "";
@@ -169,22 +218,32 @@ function detectDeadlock() {
   mediaDiv.innerHTML = "";
 
   if (deadlocked.length > 0) {
-    output.innerHTML = `Deadlock detected among processes: ${deadlocked
+    output.innerHTML = `<span style="color: #f5576c;">⚠️ Deadlock Detected!</span><br>
+      <span style="color: #a8b2d1; font-size: 1rem;">Affected Processes: ${deadlocked
       .map((i) => "P" + i)
-      .join(", ")}`;
+      .join(", ")}</span>`;
+    output.style.background = 'rgba(245, 87, 108, 0.1)';
+    output.style.border = '2px solid rgba(245, 87, 108, 0.3)';
+    
     // image (make sure file exists or replace path)
     const img = document.createElement("img");
     img.src = "./assets/3_Spiderman_Pointing_Meme_Template_V1.jpg";
     img.alt = "Deadlock Meme";
+    img.style.animation = "fadeIn 0.5s ease-out";
     mediaDiv.appendChild(img);
   } else {
-    output.innerHTML = `No Deadlock Detected!`;
+    output.innerHTML = `<span style="color: #4facfe;">✅ No Deadlock Detected!</span><br>
+      <span style="color: #a8b2d1; font-size: 1rem;">All processes can proceed safely</span>`;
+    output.style.background = 'rgba(79, 172, 254, 0.1)';
+    output.style.border = '2px solid rgba(79, 172, 254, 0.3)';
+    
     const vid = document.createElement("video");
     vid.src =
       "./assets/aura-farming-gif-indonesian-boat-racing-kid-iyyQ7IFOc6-video.mp4";
     vid.controls = true;
     vid.autoplay = true;
     vid.loop = true;
+    vid.style.animation = "fadeIn 0.5s ease-out";
     mediaDiv.appendChild(vid);
   }
 }
@@ -192,4 +251,28 @@ function detectDeadlock() {
 // Optional: initial setup on first load
 window.addEventListener("DOMContentLoaded", () => {
   setupMatrixInputs();
+  
+  // Add intersection observer for scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, observerOptions);
+  
+  // Observe sections for animations
+  document.querySelectorAll('section').forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(20px)';
+    section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+    observer.observe(section);
+  });
 });
+
