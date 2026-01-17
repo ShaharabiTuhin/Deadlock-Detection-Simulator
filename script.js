@@ -40,6 +40,20 @@ window.addEventListener('scroll', () => {
 // ============================================
 // DEADLOCK DETECTION LOGIC
 // ============================================
+// Check if process i can finish
+// let canProceed = true;
+// for (let j = 0; j < m; j++) {
+//   if (request[i][j] > work[j]) {  // Does process need more than available?
+//     canProceed = false;            // NO, it can't proceed
+//     break;
+//   }
+// }
+
+// // If process can finish
+// if (canProceed) {
+//   work[j] += allocation[i][j];     // Free up its resources
+//   finish[i] = true;                // Mark as finished
+// }
 
 // Event wiring
 document
@@ -225,7 +239,7 @@ function detectDeadlock() {
     output.style.background = 'rgba(245, 87, 108, 0.1)';
     output.style.border = '2px solid rgba(245, 87, 108, 0.3)';
     
-    // image (make sure file exists or replace path)
+    // image 
     const img = document.createElement("img");
     img.src = "./assets/3_Spiderman_Pointing_Meme_Template_V1.jpg";
     img.alt = "Deadlock Meme";
