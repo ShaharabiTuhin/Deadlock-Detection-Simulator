@@ -1,0 +1,132 @@
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f172a, #0b1220);
+  color: #e6eef8;
+  min-height: 100vh;
+}
+.container {
+  width: 100%;
+  max-width: 980px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.7);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+h1 {
+  text-align: center;
+  margin: 0 0 14px;
+  font-size: 1.5rem;
+}
+.controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: end;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.95rem;
+}
+input[type="number"] {
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: inherit;
+  width: 120px;
+}
+.buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+button {
+  background: linear-gradient(180deg, #ffb86b, #ff8c00);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #0b0b0b;
+}
+.matrices {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.matrix-card {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 12px;
+  border-radius: 10px;
+}
+.matrix-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-align: center;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+th,
+td {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px;
+  text-align: center;
+}
+th {
+  background: rgba(255, 255, 255, 0.03);
+  font-weight: 700;
+}
+input.matrix-input {
+  width: 56px;
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: transparent;
+  color: inherit;
+}
+#output {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-height: 30px;
+}
+#mediaOutput {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+img,
+video {
+  max-width: 360px;
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+@media (max-width: 760px) {
+  .matrices {
+    grid-template-columns: 1fr;
+  }
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .buttons {
+    margin-left: 0;
+  }
+  input[type="number"] {
+    width: 100%;
+  }
+}

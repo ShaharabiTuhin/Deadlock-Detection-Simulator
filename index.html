@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Deadlock Detection Simulator</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Deadlock Detection Simulator</h1>
+
+    <div class="controls">
+      <div class="field">
+        <label for="numProc">Number of Processes</label>
+        <input id="numProc" type="number" min="1" value="3" />
+      </div>
+
+      <div class="field">
+        <label for="numRes">Number of Resources</label>
+        <input id="numRes" type="number" min="1" value="3" />
+      </div>
+
+      <div class="buttons">
+        <button id="setupBtn">Setup Matrices</button>
+        <button id="detectBtn" style="display:none;">Detect Deadlock</button>
+      </div>
+    </div>
+
+    <div id="matrices" class="matrices" aria-live="polite" style="margin-top:18px;">
+      <!-- Allocation and Request tables will be appended here via DOM -->
+    </div>
+
+    <div id="output"></div>
+    <div id="mediaOutput"></div>
+  </div>
+</body>
+<script src="script.js"></script>
+</html>
